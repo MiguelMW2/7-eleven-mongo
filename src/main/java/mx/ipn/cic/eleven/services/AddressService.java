@@ -15,4 +15,8 @@ public class AddressService {
 	public AddressEntity register(AddressEntity address) { 
 		return this.addressRepository.save(address);
 	}
+
+	public AddressEntity findByUser_Id(String id) { 
+		return this.addressRepository.findByUsers_Id(id);
+	}
 }

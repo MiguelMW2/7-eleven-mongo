@@ -8,4 +8,5 @@ import mx.ipn.cic.eleven.entities.AddressEntity;
 @Repository
 public interface IAddressRepository extends MongoRepository<AddressEntity, String>{
 
+	AddressEntity findByUsers_Id(String id);
 }

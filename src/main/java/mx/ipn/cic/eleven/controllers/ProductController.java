@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +40,6 @@ public class ProductController {
 		return "redirect:/product/all";
 	}
 
-	/*Cambiar por REST*/
 	@GetMapping(path="/search")
 	public ModelAndView search(
 			@RequestParam(name="name") String name,
@@ -48,5 +48,19 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView("");
 		mav.addObject("products", this.productService.search(name, upc));
 		return mav;
+	}
+
+	@GetMapping(path="/edit/{id}")
+	public ModelAndView edit(@PathVariable(name="id") String id) {
+		ProductEntity found = this.productService.findById(id);
+		ModelAndView mav = new ModelAndView("product/newForm");
+		mav.addObject("product", found);
+		return mav;
+	}
+
+	@GetMapping(path="/delete/{id}")
+	public String delete(@PathVariable(name="id") String id) {
+		this.productService.delete(id);
+		return "redirect:/product/all";
 	}
 }
