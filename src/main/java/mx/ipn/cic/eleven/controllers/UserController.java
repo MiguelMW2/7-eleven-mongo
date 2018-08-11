@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,5 +42,19 @@ public class UserController {
 		mav.addObject("user", saved);
 		mav.addObject("address", new AddressEntity());
 		return mav;
+	}
+
+	@GetMapping(path="/edit/{id}")
+	public ModelAndView edit(@PathVariable(name="id") String id) {
+		UserEntity found = this.userService.findById(id);
+		ModelAndView mav = new ModelAndView("user/newForm");
+		mav.addObject("user", found);
+		return mav;
+	}
+
+	@GetMapping(path="/delete/{id}")
+	public String delete(@PathVariable(name="id") String id) {
+		this.userService.delete(id);
+		return "redirect:/user/all";
 	}
 }
