@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Payment</title>
+</head>
+<body>
+	<select>
+		<option value="volvo">Tarjeta Debito</option>
+		<option value="saab">Tarjeta Credito</option>
+		<option value="mercedes">Transferencia</option>
+		<option value="audi">Cheque</option>
+	</select>
+	<div>
+		<a th:href="@{/sale/summary}"><button>Siguiente</button></a>
+	</div>
+</body>
+</html>
