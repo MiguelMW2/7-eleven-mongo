@@ -23,23 +23,19 @@ public class ProductService {
 	public ProductEntity register(ProductEntity product) {
 		return this.productRepository.save(product);
 	}
+	
+	public List<ProductEntity> findByNameUpc(String name, String upc) {
+		return this.productRepository.findByNameContainingOrUpcContaining(name, upc);
+	}
 
 	public ProductEntity findById(String id) {
 		Optional<ProductEntity> found = this.productRepository.findById(id);
 		try {
 			return found.get();
 		} catch (NoSuchElementException e) {
-			System.out.println("No se encontró el elemento");
+			System.out.println("No se encontró el producto");
 		}
 		return null;
-	}
-
-	public List<ProductEntity> search(String name, String upc) {
-		return this.productRepository.findByNameContainingOrUpcContaining(name, upc);
-	}
-
-	public ProductEntity save(ProductEntity product) {
-		return this.productRepository.save(product);
 	}
 
 	public boolean delete(String id) {

@@ -2,26 +2,55 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<title>Registro de Usuarios</title>
+	<meta charset="UTF-8" />
+	<title>Registro de Usuarios</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 <body>
-	<h1>Dirección</h1>
-
-	<form action="#"
-		th:action="@{/address/register}"
-		th:object="${address}"
-		method="post">
-
-		<input hidden="true" type="text" th:field="${user.id}">
-		<input placeholder="Calle" type="text" th:field="*{street}">
-		<input placeholder="Colonia" type="text" th:field="*{district}">
-		<input placeholder="Número Exterior" type="text" th:field="*{externalNumber}">
-		<input placeholder="Número Interior" type="text" th:field="*{internalNumber}">
-		<input placeholder="Estado" type="text" th:field="*{state}">
-		<input placeholder="Código Postal" type="text" th:field="*{zipCode}">
-		<button type="submit">Registrar</button>
-
-	</form>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-3"></div>
+			<div class="col-6">
+				<h2>Dirección</h2>
+				<form class="form-signin" th:action="@{/address/register}" th:object="${address}" method="post">
+					<input hidden="true" th:field="*{user.id}">
+					<input hidden="true" th:field="*{id}">
+					<div class="form-group">
+						<label for="street">Calle:</label>
+						<input type="text" th:field="*{street}" class="form-control" id="street">
+					</div>
+					<div class="form-group">
+						<label for="district">Colonia:</label>
+						<input type="text" th:field="*{district}" class="form-control" id="district">
+					</div>
+					<div class="form-group">
+						<label for="externalNumber">Número Exterior:</label>
+						<input type="text" th:field="*{externalNumber}" class="form-control" id="externalNumber">
+					</div>
+					<div class="form-group">
+						<label for="internalNumber">Número Interior:</label>
+						<input type="text" th:field="*{internalNumber}" class="form-control" id="internalNumber">
+					</div>
+					<div class="form-group">
+						<label for="state">Estado:</label>
+						<input type="text" th:field="*{state}" class="form-control" id="state">
+					</div>
+					<div class="form-group">
+						<label for="zipCode">Código Postal:</label>
+						<input type="text" th:field="*{zipCode}" class="form-control" id="zipCode">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary w-100">Registrar</button>
+					</div>
+					<div class="form-group">
+						<a class="btn btn-secondary w-100" th:href="@{/user/newForm}" role="button">Regresar</a>
+					</div>
+				</form>
+			</div>
+			<div class="col-3"></div>
+		</div>
+	</div>
 </body>
 </html>

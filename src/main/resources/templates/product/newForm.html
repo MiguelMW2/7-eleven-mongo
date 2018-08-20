@@ -2,24 +2,50 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<title>Registro de Productos</title>
+	<meta charset="UTF-8" />
+	<title>Registro de Productos</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 <body>
-	<h1>Registro de Productos</h1>
-
-	<form action="#"
-		th:action="@{/product/register}"
-		th:object="${product}"
-		method="post">
-
-		<input placeholder="Nombre" type="text" th:field="*{name}">
-		<input placeholder="Descripción" type="text" th:field="*{description}">
-		<input placeholder="Precio" type="text" th:field="*{price}">
-		<input placeholder="Almacén" type="number" th:field="*{stock}">
-		<input placeholder="Código de barras" type="text" th:field="*{upc}">
-		<button type="submit">Registrar</button>
-
-	</form>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-3"></div>
+			<div class="col-6">
+				<h2>Registro de Productos</h2>
+				<form class="form-signin" th:action="@{/product/register}" th:object="${product}" method="post">
+					<input hidden="true" th:field="*{id}">
+					<div class="form-group">
+						<label for="name">Nombre:</label>
+						<input type="text" th:field="*{name}" class="form-control" id="name">
+					</div>
+					<div class="form-group">
+						<label for="description">Descripción:</label>
+						<input type="text" th:field="*{description}" class="form-control" id="description">
+					</div>
+					<div class="form-group">
+						<label for="price">Precio:</label>
+						<input type="text" th:field="*{price}" class="form-control" id="price">
+					</div>
+					<div class="form-group">
+						<label for="stock">Existencias:</label>
+						<input type="text" th:field="*{stock}" class="form-control" id="stock">
+					</div>
+					<div class="form-group">
+						<label for="upc">Código de barras:</label>
+						<input type="text" th:field="*{upc}" class="form-control" id="upc">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary w-100">Registrar</button>
+					</div>
+					<div class="form-group">
+						<a class="btn btn-secondary w-100" th:href="@{/product/all}" role="button">Regresar</a>
+					</div>
+				</form>
+			</div>
+			<div class="col-3"></div>
+		</div>
+	</div>
 </body>
 </html>

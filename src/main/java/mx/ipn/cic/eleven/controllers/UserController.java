@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import mx.ipn.cic.eleven.entities.AddressEntity;
 import mx.ipn.cic.eleven.entities.UserEntity;
+import mx.ipn.cic.eleven.services.AddressService;
 import mx.ipn.cic.eleven.services.UserService;
 
 @Controller
@@ -19,6 +20,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private AddressService addressService;
 
 	@GetMapping(path="/all")
 	public ModelAndView allUsers() {
@@ -35,13 +39,16 @@ public class UserController {
 	}
 
 	@PostMapping(path="/register")
-	public ModelAndView register(@ModelAttribute(name="user") UserEntity user) {
-		ModelAndView mav = new ModelAndView("address/newForm");
-		UserEntity saved = new UserEntity();
-		saved = this.userService.register(user);
-		mav.addObject("user", saved);
-		mav.addObject("address", new AddressEntity());
-		return mav;
+	public String register(@ModelAttribute(name="user") UserEntity user) {
+		if (user.getId() != null && user.getId().length() == 0) {
+			user.setId(null);
+		}
+		this.userService.register(user);
+
+		if (this.addressService.findByUser_Id(user.getId()) == null) {
+			return "redirect:/address/newForm/" + user.getId();
+		}
+		return "redirect:/address/edit/" + user.getId();
 	}
 
 	@GetMapping(path="/edit/{id}")
@@ -54,6 +61,13 @@ public class UserController {
 
 	@GetMapping(path="/delete/{id}")
 	public String delete(@PathVariable(name="id") String id) {
+		try {
+			AddressEntity address = this.addressService.findByUser_Id(id);
+			this.addressService.delete(address.getId());
+		}
+		catch (Exception e) {
+			System.out.println("No se encontró el elemento");
+		}
 		this.userService.delete(id);
 		return "redirect:/user/all";
 	}

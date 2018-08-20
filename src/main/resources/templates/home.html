@@ -2,21 +2,52 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<title>Home</title>
+	<meta charset="UTF-8" />
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 <body>
+	<header></header>
+	<nav></nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-2"></div>
+			<div class="col-8">
+				<h2 class="p-3">Home</h2>
+				<div class="card-deck">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title text-center">Catálogo de Usuarios</h5>
+						</div>
+						<div class="card-footer">
+							<a class="btn btn-secondary w-100" th:href="@{/user/all}" role="button">Detalle</a>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title text-center">Catálogo de Productos</h5>
+						</div>
+						<div class="card-footer">
+							<a class="btn btn-secondary w-100" th:href="@{/product/all}" role="button">Detalle</a>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title text-center">Venta</h5>
+						</div>
+						<div class="card-footer">
+							<a class="btn btn-secondary w-100" th:href="@{/sale/sale}" role="button">Detalle</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-2"></div>
+		</div>
+	</div>
+	
 
-	<h1>Home</h1>
-	<div>
-		<a th:href="@{/user/all}"><button>Catálogo de Usuarios</button></a>
-	</div>
-	<div>
-		<a th:href="@{/product/all}"><button>Catálogo de Productos</button></a>
-	</div>
-	<div>
-		<a th:href="@{/sale/sale}"><button>Venta</button></a>
-	</div>
-
+	<footer></footer>
 </body>
 </html>

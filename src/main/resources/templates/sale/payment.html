@@ -2,18 +2,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<title>Payment</title>
+	<meta charset="UTF-8" />
+	<title>Payment</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 <body>
-	<select>
-		<option value="volvo">Tarjeta Debito</option>
-		<option value="saab">Tarjeta Credito</option>
-		<option value="mercedes">Transferencia</option>
-		<option value="audi">Cheque</option>
-	</select>
-	<div>
-		<a th:href="@{/sale/summary}"><button>Siguiente</button></a>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-3"></div>
+			<div class="col-6">
+				<h2>Opción de Pago</h2>
+				<br>
+				<form class="form-signin" th:action="@{/sale/register}" th:object="${sale}" method="post">
+					<input hidden="true" th:field="*{id}">
+					<input hidden="true" th:field="*{date}">
+					<input hidden="true" th:field="*{total}">
+					<div class="form-group">
+						<select class="custom-select" th:field="*{payment}">
+							<option value="Tarjeta Débito">Tarjeta Debito</option>
+							<option value="Tarjeta Crédito">Tarjeta Credito</option>
+							<option value="Transferencia">Transferencia</option>
+							<option value="Cheque">Cheque</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary w-100">Registrar</button>
+					</div>
+					<div class="form-group">
+						<a class="btn btn-secondary w-100" th:href="@{/sale/sale}" role="button">Regresar</a>
+					</div>
+				</form>
+			</div>
+			<div class="col-3"></div>
+		</div>
 	</div>
 </body>
 </html>

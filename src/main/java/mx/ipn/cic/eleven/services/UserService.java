@@ -42,8 +42,15 @@ public class UserService {
 		return false;
 	}
 
-	public UserEntity save(UserEntity user) {
-		return this.userRepository.save(user);
+	public UserEntity edit(String id) {
+		Optional<UserEntity> found = this.userRepository.findById(id);
+		try {
+			return found.get();
+		}
+		catch (NoSuchElementException e) {
+			System.out.println("Elemento no encontrado");
+		}
+		return null;
 	}
 
 	public boolean delete(String id) {

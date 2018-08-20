@@ -3,46 +3,42 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
-	<title>Resumén</title>
+	<title>Address Details</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-1"></div>
 			<div class="col-10">
-				<a class="btn btn-secondary w-10" th:href="@{/login/home}" role="button">Menú Principal</a>
+				<a class="btn btn-secondary w-10" th:href="@{/user/all}" role="button">Regresar</a>
 			</div>
 		</div>
 		<br>
 		<div class="row">
 			<div class="col-1"></div>
 			<div class="col-10">
-				<div class="alert alert-success" role="alert">Venta Finalizada Exitosamente!!!</div>
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<div class="col-1"></div>
-			<div class="col-10">
-				<table class="table">
-					<thead class="thead-light">
+				<table class="table table-striped">
+					<thead class="thead-dark">
 						<tr>
-							<th scope="col">Fecha</th>
-							<th scope="col">Total</th>
-							<th scope="col">Método de pago</th>
-							<th scope="col">Cajero</th>
+							<th>Calle</th>
+							<th>Colonia</th>
+							<th>Número exterior</th>
+							<th>Número interior</th>
+							<th>Estado</th>
+							<th>Código Postal</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:object="${sale}">
-							<td th:text="*{date}"></td>
-							<td th:text="*{total}"></td>
-							<td th:text="*{payment}"></td>
-							<td>Miguel</td>
+						<tr th:object="${address}">
+							<td th:text="*{street}"></td>
+							<td th:text="*{district}"></td>
+							<td th:text="*{externalNumber}"></td>
+							<td th:text="*{internalNumber}"></td>
+							<td th:text="*{state}"></td>
+							<td th:text="*{zipCode}"></td>
 						</tr>
 					</tbody>
 				</table>

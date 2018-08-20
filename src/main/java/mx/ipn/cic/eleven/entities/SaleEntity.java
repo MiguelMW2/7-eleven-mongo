@@ -1,8 +1,8 @@
 package mx.ipn.cic.eleven.entities;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -15,9 +15,9 @@ public class SaleEntity {
 	@Id
 	private String id;
 
-	private Date date;
+	private LocalDateTime date;
 
-	private Double total;
+	private double total;
 
 	private String payment;
 
@@ -31,7 +31,12 @@ public class SaleEntity {
 		super();
 	}
 
-	public SaleEntity(String id, Date date, Double total, String payment, UserEntity users,
+	public SaleEntity(LocalDateTime date) {
+		super();
+		this.date = date;
+	}
+
+	public SaleEntity(String id, LocalDateTime date, double total, String payment, UserEntity users,
 			Collection<DetailSaleEntity> detailSales) {
 		super();
 		this.id = id;
@@ -42,7 +47,7 @@ public class SaleEntity {
 		this.detailSales = detailSales;
 	}
 
-	public SaleEntity(Date date, Double total, String payment, UserEntity users,
+	public SaleEntity(LocalDateTime date, double total, String payment, UserEntity users,
 			Collection<DetailSaleEntity> detailSales) {
 		super();
 		this.date = date;
@@ -60,19 +65,19 @@ public class SaleEntity {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 
-	public Double getTotal() {
+	public double getTotal() {
 		return total;
 	}
 
-	public void setTotal(Double total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 

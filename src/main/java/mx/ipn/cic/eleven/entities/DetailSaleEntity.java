@@ -12,40 +12,32 @@ public class DetailSaleEntity {
 	@Id
 	private String id;
 
-	private Integer quantityProduct;
+	private double quantity;
 
 	@DBRef
 	@JsonBackReference
-	private SaleEntity sales;
+	private SaleEntity sale;
 
 	@DBRef
-	private ProductEntity products;
-
-	/*@DBRef
-	 * @JsonIgnore
-	 * @JsonBackReference
-	 * private SellEntity sell
-	
-	 * private List<SellDetailEntity> detail
-	*/
+	private ProductEntity product;
 
 	public DetailSaleEntity() {
 		super();
 	}
 
-	public DetailSaleEntity(String id, Integer quantityProduct, SaleEntity sales, ProductEntity products) {
+	public DetailSaleEntity(String id, double quantity, SaleEntity sale, ProductEntity product) {
 		super();
 		this.id = id;
-		this.quantityProduct = quantityProduct;
-		this.sales = sales;
-		this.products = products;
+		this.quantity = quantity;
+		this.sale = sale;
+		this.product = product;
 	}
 
-	public DetailSaleEntity(Integer quantityProduct, SaleEntity sales, ProductEntity products) {
+	public DetailSaleEntity(double quantity, SaleEntity sale, ProductEntity product) {
 		super();
-		this.quantityProduct = quantityProduct;
-		this.sales = sales;
-		this.products = products;
+		this.quantity = quantity;
+		this.sale = sale;
+		this.product = product;
 	}
 
 	public String getId() {
@@ -56,33 +48,32 @@ public class DetailSaleEntity {
 		this.id = id;
 	}
 
-	public Integer getQuantityProduct() {
-		return quantityProduct;
+	public double getQuantity() {
+		return quantity;
 	}
 
-	public void setQuantityProduct(Integer quantityProduct) {
-		this.quantityProduct = quantityProduct;
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
 	}
 
-	public SaleEntity getSales() {
-		return sales;
+	public SaleEntity getSale() {
+		return sale;
 	}
 
-	public void setSales(SaleEntity sales) {
-		this.sales = sales;
+	public void setSale(SaleEntity sale) {
+		this.sale = sale;
 	}
 
-	public ProductEntity getProducts() {
-		return products;
+	public ProductEntity getProduct() {
+		return product;
 	}
 
-	public void setProducts(ProductEntity products) {
-		this.products = products;
+	public void setProduct(ProductEntity product) {
+		this.product = product;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("DetailSaleEntity [id=%s, quantityProduct=%s, sales=%s, products=%s]", id, quantityProduct,
-				sales, products);
+		return String.format("DetailSaleEntity [id=%s, quantity=%s, sale=%s, product=%s]", id, quantity, sale, product);
 	}
 }

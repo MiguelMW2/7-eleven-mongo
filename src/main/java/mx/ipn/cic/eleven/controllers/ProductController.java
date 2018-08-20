@@ -36,7 +36,24 @@ public class ProductController {
 
 	@PostMapping(path="/register")
 	public String register(@ModelAttribute(name="product") ProductEntity product) {
+		if (product.getId() != null && product.getId().length() == 0) {
+			product.setId(null);
+		}
 		this.productService.register(product);
+		return "redirect:/product/all";
+	}
+
+	@GetMapping(path="/edit/{id}")
+	public ModelAndView edit(@PathVariable(name="id") String id) {
+		ProductEntity product = this.productService.findById(id);
+		ModelAndView mav = new ModelAndView("product/newForm");
+		mav.addObject("product", product);
+		return mav;
+	}
+
+	@GetMapping(path="/delete/{id}")
+	public String delete(@PathVariable(name="id") String id) {
+		this.productService.delete(id);
 		return "redirect:/product/all";
 	}
 
@@ -46,21 +63,7 @@ public class ProductController {
 			@RequestParam(name="upc") String upc) {
 
 		ModelAndView mav = new ModelAndView("");
-		mav.addObject("products", this.productService.search(name, upc));
+		mav.addObject("products", this.productService.findByNameUpc(name, upc));
 		return mav;
-	}
-
-	@GetMapping(path="/edit/{id}")
-	public ModelAndView edit(@PathVariable(name="id") String id) {
-		ProductEntity found = this.productService.findById(id);
-		ModelAndView mav = new ModelAndView("product/newForm");
-		mav.addObject("product", found);
-		return mav;
-	}
-
-	@GetMapping(path="/delete/{id}")
-	public String delete(@PathVariable(name="id") String id) {
-		this.productService.delete(id);
-		return "redirect:/product/all";
 	}
 }

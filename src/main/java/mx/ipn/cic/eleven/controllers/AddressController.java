@@ -24,15 +24,43 @@ public class AddressController {
 	@Autowired
 	private UserService userService;
 
+	@GetMapping(path="/all")
+	public ModelAndView allAddress() {
+		ModelAndView mav = new ModelAndView("address/all");
+		mav.addObject("addresses", this.addressService.allAddress());
+		return mav;
+	}
+
+	@GetMapping(path="/newForm/{id}")
+	public ModelAndView newForm(@PathVariable(name="id") String id) {
+		ModelAndView mav = new ModelAndView("address/newForm");
+		UserEntity found = this.userService.findById(id);
+		mav.addObject("address", this.addressService.register(new AddressEntity(found)));
+		return mav;
+	}
+
 	@PostMapping(path="/register")
 	public String register(
-			@ModelAttribute(name="address") AddressEntity address,
-			@ModelAttribute(name="user") UserEntity user
+			@ModelAttribute(name="address") AddressEntity address
 	) {
-		UserEntity found = userService.findById(user.getId());
+		UserEntity found = this.userService.findById(address.getUser().getId());
 		address.setUser(found);
 		this.addressService.register(address);
 		return "redirect:/user/all";
+	}
+
+	@GetMapping(path="/edit/{id}")
+	public ModelAndView edit(@PathVariable(name="id") String id) {
+		AddressEntity found = this.addressService.findByUser_Id(id);
+		ModelAndView mav = new ModelAndView("address/newForm");
+		mav.addObject("address", found);
+		return mav;
+	}
+
+	@GetMapping(path="/delete/{id}")
+	public String delete(@PathVariable(name="id") String id) {
+		this.addressService.delete(id);
+		return "redirect:/address/all";
 	}
 
 	@GetMapping(path="/detail/{id}")

@@ -1,4 +1,4 @@
-package mx.ipn.cic.eleven.controllers;
+package mx.ipn.cic.eleven.rest_controllers;
 
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class UserRESTController {
 	public ResponseEntity<UserEntity> save(@RequestBody UserEntity user) {
 		ResponseEntity<UserEntity> response;
 		try {
-			this.userService.save(user);
+			this.userService.register(user);
 			response = new ResponseEntity<UserEntity>(user, HttpStatus.CREATED);
 		} catch (Exception e) {
 			response = new ResponseEntity<UserEntity>(HttpStatus.NOT_ACCEPTABLE);
@@ -80,7 +80,7 @@ public class UserRESTController {
 		user.setId(id);
 		ResponseEntity<UserEntity> response;
 		try {
-			this.userService.save(user);
+			this.userService.register(user);
 			response = new ResponseEntity<UserEntity>(user, HttpStatus.OK);
 		} catch (Exception e) {
 			response = new ResponseEntity<UserEntity>(HttpStatus.NOT_MODIFIED);
