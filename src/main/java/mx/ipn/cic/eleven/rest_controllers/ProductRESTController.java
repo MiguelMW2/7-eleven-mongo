@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,15 +23,13 @@ public class ProductRESTController {
 	@Autowired
 	private ProductService productService;
 
-	@GetMapping(path="/search/{name}/{upc}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ProductEntity>> search(
-			@PathVariable(name="name") String name,
-			@PathVariable(name="upc") String upc
-			/*RequestBody*/
+	@PostMapping(path="/search", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ProductEntity>> search(@RequestBody ProductEntity product
 	) {
+		System.out.println(product);
 		ResponseEntity<List<ProductEntity>> response;
 		try {
-			List<ProductEntity> foundProducts = this.productService.findByNameUpc(name, upc);
+			List<ProductEntity> foundProducts = this.productService.findByNameUpc(product.getName(), product.getUpc());
 			response = new ResponseEntity<List<ProductEntity>>(foundProducts, HttpStatus.OK);
 		} catch (Exception e) {
 			response = new ResponseEntity<List<ProductEntity>>(HttpStatus.UNPROCESSABLE_ENTITY);

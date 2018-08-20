@@ -5,29 +5,35 @@ $(function() {
 	$("#searchProduct").click(function () {
 		let name = $("#name").val();
 		let upc = $("#upc").val();
-		let idSale = $("#idSale").val();
 		$.ajax({
-			type : "GET",
+			type : "POST",
 			contentType : "application/json",
-			url : "/rest/product/search/" + name + "/" + upc,
+			url : "/rest/product/search",
+			data : JSON.stringify({ "name" : name, "upc" : upc }),
 			dataType : 'json',
 			success : function(result) {
-				$("#products").empty();
-				$.each(result, function (index, product) {
-					let table = "<tr>";
-					table += "<td>" + product.name + "</td>";
-					table += "<td>" + product.description + "</td>";
-					table += "<td>" + product.price + "</td>";
-					table += "<td>" + product.stock + "</td>";
-					table += "<td>" + product.upc + "</td>";
-					table += "<td><button onclick='selectProduct(" + JSON.stringify(product) + ")'>" + "Seleccionar" + "</button></td>";
-					table += "</tr>";
-					$("#products").append(table);
-					$("#products td button").addClass("btn btn-danger w-100");
-				});
+				if (typeof result !== 'undefined' && result.length > 0) {
+					$("#products").empty();
+					$.each(result, function (index, product) {
+						let table = "<tr>";
+						table += "<td>" + product.name + "</td>";
+						table += "<td>" + product.description + "</td>";
+						table += "<td>" + product.price + "</td>";
+						table += "<td>" + product.stock + "</td>";
+						table += "<td>" + product.upc + "</td>";
+						table += "<td><button onclick='selectProduct(" + JSON.stringify(product) + ")'>" + "Seleccionar" + "</button></td>";
+						table += "</tr>";
+						$("#products").append(table);
+						$("#products td button").addClass("btn btn-danger w-100");
+					});
+				}
+				else {
+					console.log("Modal");
+					$('#exampleModalCenter').modal('show');
+				}
 			},
 			error : function(e) {
-				alert("No se encontraron productos");
+				alert("Error");
 			}
 		});
 	});
