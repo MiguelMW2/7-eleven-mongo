@@ -1,6 +1,7 @@
 package mx.ipn.cic.eleven.entities;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -103,6 +104,11 @@ public class SaleEntity {
 
 	public void setDetailSales(Collection<DetailSaleEntity> detailSales) {
 		this.detailSales = detailSales;
+	}
+
+	public String dateFormatted() {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+		return dtf.format(date);
 	}
 
 	@Override

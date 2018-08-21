@@ -18,7 +18,7 @@ $(function() {
 						let table = "<tr>";
 						table += "<td>" + product.name + "</td>";
 						table += "<td>" + product.description + "</td>";
-						table += "<td>" + product.price + "</td>";
+						table += "<td>$" + product.price + "</td>";
 						table += "<td>" + product.stock + "</td>";
 						table += "<td>" + product.upc + "</td>";
 						table += "<td><button onclick='selectProduct(" + JSON.stringify(product) + ")'>" + "Seleccionar" + "</button></td>";
@@ -50,8 +50,9 @@ $(function() {
 			let table = "<tr id='" + product.id + "'>";
 			table += "<td>" + product.name + "</td>";
 			table += "<td>" + product.description + "</td>";
-			table += "<td>" + product.price + "</td>"
+			table += "<td>$" + product.price + "</td>"
 			table += "<td class='quantity'>" + 1 + "</td>"
+			table += "<td class='subtotal'>$" + product.price + "</td>"
 			table += "</tr>";
 			$("#selectedProducts").append(table);
 		}
@@ -59,8 +60,16 @@ $(function() {
 			let detail = findObject( detailSale, "id", product.id );
 			detail.quantity = detail.quantity + 1;
 			$("#selectedProducts tr#" + product.id + " td.quantity").text(detail.quantity);
+			$("#selectedProducts tr#" + product.id + " td.subtotal").text("$" + detail.quantity * product.price);
 			console.log(detailSale);
 		}
+		$("div#total").text(function() {
+			let total = 0;
+			detailSale.forEach(function(detail) {
+				total = total + detail.quantity * detail.product.price; 
+			});
+			return "Total: $" + total;
+		});
 	}
 
 	$("#sendDetailSale").click(function () {

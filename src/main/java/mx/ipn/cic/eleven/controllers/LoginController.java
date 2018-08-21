@@ -20,28 +20,24 @@ public class LoginController {
 	private UserService userService;
 
 	@GetMapping(path="")
-	public ModelAndView login()
-	{
+	public ModelAndView login()	{
 		ModelAndView mav = new ModelAndView("login");
 		mav.addObject("user", new UserEntity());
 		return mav;
 	}
 	
-	@GetMapping(path="/home")
-	public ModelAndView home()
-	{
+	@GetMapping(path="/home") 
+	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("home");
 		mav.addObject("user", new UserEntity());
 		return mav;
 	}
 
 	@PostMapping(path="/authenticate")
-	public String authenticate(@ModelAttribute(name="user") UserEntity user)
-	{
+	public String authenticate(@ModelAttribute(name="user") UserEntity user) {
 		if(this.userService.findByUserNameAndPassword(user)) {
 			return "redirect:/login/home";
 		}
 		return "redirect:/login";
 	}
 }
-	
