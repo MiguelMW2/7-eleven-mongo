@@ -18,7 +18,7 @@ $(function() {
 						let table = "<tr>";
 						table += "<td>" + product.name + "</td>";
 						table += "<td>" + product.description + "</td>";
-						table += "<td>" + product.price + "</td>";
+						table += "<td>$" + product.price + "</td>";
 						table += "<td>" + product.stock + "</td>";
 						table += "<td>" + product.upc + "</td>";
 						table += "<td><button onclick='selectProduct(" + JSON.stringify(product) + ")'>" + "Seleccionar" + "</button></td>";
@@ -50,7 +50,7 @@ $(function() {
 			let table = "<tr id='" + product.id + "'>";
 			table += "<td>" + product.name + "</td>";
 			table += "<td>" + product.description + "</td>";
-			table += "<td>" + product.price + "</td>"
+			table += "<td>$" + product.price + "</td>"
 			table += "<td class='quantity'>" + 1 + "</td>"
 			table += "</tr>";
 			$("#selectedProducts").append(table);

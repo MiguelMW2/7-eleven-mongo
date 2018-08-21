@@ -3,8 +3,8 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
-	<title>Resumén</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/sale.css}">
+	<title>Product</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/product.css}">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -16,21 +16,14 @@
 		<div class="row">
 			<div class="col-1"></div>
 			<div class="col-10">
-				<a class="btn btn-secondary w-10" th:href="@{/login/home}" role="button">Menú Principal</a>
+				<a class="btn btn-secondary w-10" th:href="@{/login/home}" role="button">Regresar</a>
 			</div>
 		</div>
 		<br>
 		<div class="row">
 			<div class="col-1"></div>
 			<div class="col-10">
-				<div class="alert alert-success" role="alert">Venta Finalizada Exitosamente!!!</div>
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<div class="col-1"></div>
-			<div class="col-10">
-				<table class="table">
+				<table class="table table-striped">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">Fecha</th>
@@ -40,10 +33,10 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:object="${sale}">
-							<td th:text="*{date}"></td>
-							<td th:inline="text">$[[*{total}]]</td>
-							<td th:text="*{payment}"></td>
+						<tr th:each="sale: ${sales}">
+							<td th:text="${sale.date}"></td>
+							<td th:inline="text">$[[${sale.total}]]</td>
+							<td th:text="${sale.payment}"></td>
 							<td>Miguel</td>
 						</tr>
 					</tbody>
