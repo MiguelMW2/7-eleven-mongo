@@ -17,7 +17,7 @@ public class ProductService {
 	private IProductRepository productRepository;
 
 	public List<ProductEntity> allProducts() {
-		return this.productRepository.findAll();
+		return this.productRepository.findAllByOrderByName();
 	}
 	
 	public ProductEntity register(ProductEntity product) {

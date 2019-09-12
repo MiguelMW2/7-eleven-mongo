@@ -11,4 +11,5 @@ import java.lang.String;
 @Repository
 public interface IProductRepository extends MongoRepository<ProductEntity, String>{
 	 List<ProductEntity> findByNameContainingOrUpcContaining(String name, String upc);
+	 List<ProductEntity> findAllByOrderByName();
 }
